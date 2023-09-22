@@ -1,0 +1,66 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "location": {
+      "value": "eastus2"
+    },
+    "subscriptionId": {
+      "value": "b78350e9-3050-48ce-be2d-d1fa07a1c512"
+    },
+    "resourceGroupName": {
+      "value": "rg-my-mermaid-tales"
+    },
+    "functionAppName": {
+      "value": "func-my-mermaid-tales"
+    },
+    "keyVaultName": {
+      "value": "kv-my-mermaid-tales"
+    },
+    "keyVaultCIName": {
+      "value": "ky-my-mermaid-tales-ci"
+    },
+    "azureDevOpsServiceConnectionId": {
+      "value": "9981c1e8-08ad-416a-8e6c-328f363de686"
+    },
+    "tenantId": {
+      "value": "5211b316-a257-4728-980b-e6d793f3c8f6"
+    },
+    "logAnalyticsWorkspaceName": {
+      "value": "log-my-mermaid-tales"
+    },
+    "appConfigurationName": {
+      "value": "aac-my-mermaid-tales"
+    },
+    "appServicePlanName": {
+      "value": "plan-my-mermaid-tales"
+    },
+    "applicationInsightsName": {
+      "value": "appi-my-mermaid-tales"
+    },
+    "staticWebAppName": {
+      "value": "stapp-my-mermaid-tales"
+    },
+    "storageAccountName": {
+      "value": "stmymermaidtales"
+    },
+    "repositoryURL": {
+      "value": "https://dev.azure.com/rosaliedesignstudio/mymermaidtales/_git/landing-site"
+    },
+    "communicationServicesName": {
+      "value": "acs-my-mermaid-tales"
+    },
+    "serviceBusNamespace": {
+      "value": "sbns-my-mermaid-tales"
+    },
+    "serviceBusTopicContactFormSubmission": {
+      "value": "sbt-contact-form-submission"
+    },
+    "actionGroupName": {
+      "value": "ag-my-mermaid-tales"
+    },
+    "engineeringSupportPhoneNumber": {
+      "value": "7065776256"
+    }
+  }
+}

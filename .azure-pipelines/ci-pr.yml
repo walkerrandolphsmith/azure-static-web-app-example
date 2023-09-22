@@ -1,0 +1,44 @@
+trigger: none
+
+variables:
+  - group: ci
+  - name: azureDevOpsServiceConnection
+    value: "azure-dev-ops-connector"
+  - name: webDirectory
+    value: $(System.DefaultWorkingDirectory)/web
+  - name: ephemeralEnvironmentUrl
+    value: https://jolly-sand-06c208a0f-$(System.PullRequest.PullRequestId).eastus2.3.azurestaticapps.net
+
+stages:
+  - stage: Deploy
+    jobs:
+      - job: deploy
+        displayName: Deploy
+        pool:
+          vmImage: ubuntu-20.04
+        steps:
+          - template: ./templates/install-node.yml
+          - template: ./templates/install-yarn.yml
+          - template: ./templates/install-dependencies.yml
+          - template: ./templates/lint.yml
+          - template: ./templates/build-web.yml
+          - template: ./templates/build-api.yml
+          - template: ./templates/deploy-ephemeral-environments.yml
+          - task: Bash@3
+            displayName: "Post Ephemeral Environment Link"
+            inputs:
+              targetType: inline
+              script: |
+                export EPHEMERAL_ENVIRONMENT_URL=$(ephemeralEnvironmentUrl)
+                export BUILD_REPOSITORY_ID=$(Build.Repository.ID)
+                export SYSTEM_ACCESSTOKEN=$(System.AccessToken)
+                export SYSTEM_TEAMFOUNDATIONCOLLECTIONURI=$(System.TeamFoundationCollectionUri)
+                export SYSTEM_TEAMPROJECT=$(System.TeamProject)
+                export SYSTEM_PULLREQUEST_PULLREQUESTID=$(System.PullRequest.PullRequestId)
+                yarn workspace ci ci:post-ephemeral-environment-link
+          - template: ./templates/test-end-to-end.yml
+            parameters:
+              baseURL: $(ephemeralEnvironmentUrl)
+          - template: ./templates/audit-lighthouse.yml
+            parameters:
+              baseURL: $(ephemeralEnvironmentUrl)

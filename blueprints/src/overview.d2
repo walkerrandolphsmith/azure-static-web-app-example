@@ -1,0 +1,29 @@
+domain: mymermaidtales.com {
+    icon: https://icons.terrastruct.com/azure%2FWeb%20Service%20Color%2FApp%20Service%20Domains.svg
+}
+
+api: Function App {
+    icon: https://icons.terrastruct.com/azure%2FCompute%20Service%20Color%2FFunction%20Apps.svg
+}
+
+web: Static Web App  {
+    icon: https://icons.terrastruct.com/azure%2FWeb%20Service%20Color%2FApp%20Services.svg
+}
+
+html: HTML {
+    icon: https://icons.terrastruct.com/dev%2Fhtml5.svg
+}
+
+customer: Customer {
+    icon: https://icons.terrastruct.com/azure%2FGeneral%20Service%20Icons%2FUser%20Icon.svg
+}
+
+customer -> domain : navigates to website using phone or computer
+
+domain -> web : resolves request from
+
+web -> html : responds with
+
+html -> customer
+
+web -> api : proxies to linked backend APIs

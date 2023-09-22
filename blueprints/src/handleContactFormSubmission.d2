@@ -1,0 +1,77 @@
+customer: Customer {
+    icon: https://icons.terrastruct.com/azure%2FGeneral%20Service%20Icons%2FUser%20Icon.svg
+}
+
+web: Static Web App  {
+    icon: https://icons.terrastruct.com/azure%2FWeb%20Service%20Color%2FApp%20Services.svg
+}
+
+handleFormSubmissionTrigger: handleFormSubmission HTTP trigger {
+    icon: https://icons.terrastruct.com/azure%2FCompute%20Service%20Color%2FFunction%20Apps.svg
+}
+
+emailTrigger: sendWelcomEmail trigger {
+    icon: https://icons.terrastruct.com/azure%2FCompute%20Service%20Color%2FFunction%20Apps.svg
+}
+
+persistCustomerInfoTrigger: recordContanctFormSubmission trigger {
+    icon: https://icons.terrastruct.com/azure%2FCompute%20Service%20Color%2FFunction%20Apps.svg
+}
+
+topic: Service Bus Topic {
+    icon: https://icons.terrastruct.com/azure%2FIntegration%20Service%20Color%2FAzure%20Service%20Bus.svg
+    shape: queue
+}
+
+subOne: Service Bus Subscription {
+    icon: https://icons.terrastruct.com/azure%2FIntegration%20Service%20Color%2FAzure%20Service%20Bus.svg
+}
+
+subTwo: Service Bus Subscription {
+    icon: https://icons.terrastruct.com/azure%2FIntegration%20Service%20Color%2FAzure%20Service%20Bus.svg
+}
+
+storage: Table Storage {
+    icon: https://icons.terrastruct.com/azure%2FStorage%20Service%20Color%2FStorage%20Accounts.svg
+}
+
+email: Azure Notification Services {
+}
+
+
+
+customer -> web : pre orders book
+
+web -> handleFormSubmissionTrigger : submits form
+
+handleFormSubmissionTrigger -> web : acknowledge submission
+
+handleFormSubmissionTrigger -> topic : produce message
+
+subOne -> emailTrigger : triggers
+
+subTwo -> persistCustomerInfoTrigger : triggers
+
+persistCustomerInfoTrigger -> storage : persist customer info
+
+emailTrigger -> email : send email using
+
+monitor : Monitor {
+    icon: https://icons.terrastruct.com/azure%2FDevOps%20Service%20Color%2FApplication%20Insights.svg
+}
+
+deadletter: Dead Letter Queue {
+    icon: https://icons.terrastruct.com/azure%2FIntegration%20Service%20Color%2FAzure%20Service%20Bus.svg
+}
+
+alert : Alert {
+    icon: https://icons.terrastruct.com/azure%2FManagement%20and%20Governance%20Service%20Color%2FAlerts.svg
+}
+
+sms: Phone {
+    icon: https://icons.terrastruct.com/azure%2FMobile%20Service%20Color%2FAzure%20Mobile%20Engagement.svg
+}
+
+monitor -> deadletter : poll
+deadletter -> alert : triggers
+alert -> sms : send sms to recover customer lead

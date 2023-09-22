@@ -1,0 +1,82 @@
+
+domain: mymermaidtales.com {
+    icon: https://icons.terrastruct.com/azure%2FWeb%20Service%20Color%2FApp%20Service%20Domains.svg
+}
+
+plan: App Service Plan {
+    icon: https://icons.terrastruct.com/azure%2FWeb%20Service%20Color%2FApp%20Service%20Plans.svg
+}
+
+api: Function App {
+    icon: https://icons.terrastruct.com/azure%2FCompute%20Service%20Color%2FFunction%20Apps.svg
+}
+
+aad: Azure Active Directory {
+    icon: https://icons.terrastruct.com/azure%2FIdentity%20Service%20Color%2FAzure%20AD%20Domain%20Services.svg
+}
+
+enterpriseApp: Enterprise Application (Service Principal) {
+    icon: https://icons.terrastruct.com/azure%2FIdentity%20Service%20Color%2FEnterprise%20Applications.svg
+}
+
+identity: System Assigned Managed Identity (Service Principal) {
+    icon: https://icons.terrastruct.com/azure%2FIdentity%20Service%20Color%2FManaged%20Identities.svg
+}
+
+web: Static Web App  {
+    icon: https://icons.terrastruct.com/azure%2FWeb%20Service%20Color%2FApp%20Services.svg
+}
+
+storage: Storage Account {
+    icon: https://icons.terrastruct.com/azure%2FStorage%20Service%20Color%2FStorage%20Accounts.svg
+}
+
+broker: Service Bus {
+    icon: https://icons.terrastruct.com/azure%2FIntegration%20Service%20Color%2FAzure%20Service%20Bus.svg
+}
+
+communication : Azure Communication Services {
+    
+}
+
+config: App Configuration {
+    icon: https://icons.terrastruct.com/azure%2FIntegration%20Service%20Color%2FApp%20Configuration.svg
+}
+
+vault: Key Vault {
+    icon: https://icons.terrastruct.com/azure%2FSecurity%20Service%20Color%2FKey%20Vaults.svg
+}
+
+settings: App Settings {
+
+}
+
+aad -> enterpriseApp : registers identity object
+
+enterpriseApp -> identity : mapped to
+
+api -> plan : consumption plan
+
+api -> identity : system assinged identity
+
+identity -> storage : assigned Blob Data Owner role
+
+identity -> storage : assigned Table Data Contributor role
+
+identity -> broker : assigned Service Bus Data Owner role
+
+identity -> communication : assigned Owner role
+
+identity -> vault : assigned Key Vault Secrets User role
+
+web -> api : linked backend
+
+domain -> web : custom domain
+
+api -> settings : obtain app configuration connection string
+
+settings -> vault : Microsoft(vault=X,secret=Y)
+
+config -> vault : read secrets
+
+api -> config : read config
